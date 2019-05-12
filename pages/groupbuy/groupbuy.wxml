@@ -1,0 +1,270 @@
+<import src="../../Component/sharebox/sharebox.wxml" />
+<import src="../../wxParse/wxParse.wxml" />
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<!-- 分享按钮 -->
+<button class="share iconfont icon-share_icon flex flex_pack_center flex_align_center" open-type='share'></button>
+<!-- 轮播区域 -->
+<view class="swiper">
+  <swiper indicator-dots="{{true}}" bindchange='onSlideChangeEnd' current="0" circular="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{500}}" style="width: 750rpx;height: 750rpx;">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 价格区域 -->
+  <view class="priceGroup">
+    <!-- <text style='font-size:28rpx;'>￥</text>
+    <text class="price">{{filters.toFix(price,2)}}</text>
+    <view class="oldPrice">
+      <text>原价￥{{filters.toFix(oldPrice,2)}}</text>
+      <view wx:if="{{isduobao}}">抽奖价</view>
+      <view wx:else>{{gbnum}}人团</view>
+    </view> -->
+    <text class="cjj" wx:if="{{isduobao}}">抽奖价</text>
+    <text class="cjj" wx:else>{{gbnum}}人团</text>
+    <text class="np" style="font-size:32rpx;">￥</text>
+    <text class="np" style="margin-left:0;">{{filters.toFix(price,2)}}</text>
+    <text class="olddprice">￥{{filters.toFix(oldPrice,2)}}</text>
+  </view>
+  <view class="page flex flex_align_center flex_pack_center"><text>{{currentIndex+1}} / {{imgUrls.length}}</text></view>
+</view>
+
+<!-- 商品信息 -->
+<view class="proDetails flex flex_v">
+  <view class="details line_over_2 flex">
+  <!-- <text class="quanqiu" wx:if="{{msg.iscross}}"><text>全球购</text>包邮包税</text> -->
+    <text class=""> {{msg.name || msg.proname}}</text>
+  </view>
+  <view>
+    <text class="slogan flex flex_align_center flex_pack_center" wx:if="{{msg.headfree || msg.buyonegetone}}">
+      <text class="" style="background:#EB6100;" wx:if="{{msg.headfree}}">团长免单</text>
+      <text class="buy" wx:if="{{msg.buyonegetone}}">买一送一</text>
+    </text>
+  </view>
+</view>
+<block wx:if="{{isduobao}}">
+  <!-- 横条 -->
+  <view style="width: 750rpx;height: 2rpx;background-color: #fff" class="flex flex_pack_center">
+    <view style="width: 702rpx;height: 2rpx;background-color: #f6f6fa"></view>
+  </view>
+  <!-- 参团进度条 -->
+  <view class="progress flex flex_v flex_align_center">
+    <view class="line">
+      <view style="width: {{(msg.amout / msg.totalamout) * 100 + '%'}}"></view>
+    </view>
+    <view class="attend flex flex_pack_justify_between">
+      <text>{{msg.amout}}人已参加</text>
+      <text>剩余{{msg.remainingamout}}</text>
+    </view>
+  </view>
+</block>
+
+<!-- 优惠券 -->
+<view class="coupon" bindtap="showcoupon" wx:if="{{uid && (hasGet || unGet)}}">
+  <view>
+    <text>{{unGet ? '领券' : '已领'}}</text>
+    <text class="t1">{{unGet[0] ? unGet[0].companyname : hasGet[0] ? hasGet[0].companyname : ''}}</text>
+    <text class="t2" wx:if="{{unGet && index<2}}" wx:for="{{unGet}}">{{'满' + item.uselimit + '减' + item.facevalue + '元' }}</text>
+    <text class="t2" wx:if="{{!unGet && hasGet && index<2}}" wx:for="{{hasGet}}">{{'满' + item.uselimit + '减' + item.facevalue + '元' }}</text>
+  </view>
+  <view class="r icon-right iconfont"></view>
+</view>
+<!-- 没登录优惠券 -->
+<view class="coupon" bindtap="showcoupon" wx:if="{{!uid}}">
+  <view>
+    <image class="mon" src="../../image/qianbao.png"></image>
+    <text style="color: #333">注册就送100元购物礼包</text>
+  </view>
+  <view class="log" style="">立即注册</view>
+  <view class="r icon-right iconfont"></view>
+</view>
+
+<!-- 保障 -->
+<view class="ensure flex" bindtap="showMark" wx:if="{{msg.commitmentlist.length}}">
+  <block wx:for="{{msg.commitmentlist}}">
+    <view class="flex flex flex_align_center flex_pack_center">
+      <image src="{{item.logoimg}}"></image>
+      <text style="margin-left: 12rpx;">{{item.name}}</text>
+    </view>
+  </block>
+</view>
+<!-- 玩法说明 -->
+<view class="explain" wx:if="{{!isduobao}}"> 
+  <view class="title" style="color:#9b9b9b;">玩法说明</view>
+  <view class="content">
+    <view class="progress flex flex_v flex_pack_center">
+      <image src="../../image/wanfashuoming@3x.png"></image>
+    </view>
+    <view class="content-item">选择商品参加活动</view>
+    <view class="content-item">支付开团或拼团</view>
+    <view class="content-item">邀请好友参团支付</view>
+    <view class="content-item">人满成功失败退款</view>
+  </view>
+</view>
+<!-- 拼团搜索 -->
+<view class="searchm" wx:if="{{!isduobao}}">
+	<view>
+	 <input type="text" placeholder="搜索团长昵称/邀请码/手机号" bindinput="getsearch"></input>
+	 <text class="iconfont icon-fangdajing" bindtap="goSearch"></text>
+	</view>
+</view>
+<!-- 拼团成员 -->
+<view class="member" wx:if="{{!isduobao}}">
+  <block wx:for="{{gblist}}" wx:for-item="member" wx:if="{{member}}">
+    <view class="member-item flex">
+      <image src="{{member.imgphoto}}" binderror="imageError" data-index='{{index}}'></image>
+      <view class="flex flex_v flex_pack_justify_between flex_1">
+        <text class="line_over_1">{{member.realname}}</text>
+        <text>还差{{member.num}}人，还剩{{countDownTime[index]}}</text>
+      </view>
+      <view class="btn" style="background:#F5AC9E;" data-idx="{{index}}" data-isingroup="{{member.isingroup}}" data-orderid="{{member.orderidlist[0].orderid}}"
+      bindtap="{{member.isingroup ? 'goGroupDetail' : 'showPtpop'}}">{{member.isingroup ? '已参团' : '与他拼团'}}</view>
+    </view>
+  </block>
+		<view class="bindmore" bindtap="bindMore">{{gbHasMore ? '点击加载更多' : '没有更多了~'}}</view>
+</view>
+
+<!-- 拼团弹窗 -->
+<view class="ptPop flex flex_v flex_align_center flex_pack_justify_between" hidden="{{showPt}}" wx:if="{{!isduobao}}">
+  <text>还差{{ptDetailData.count}}人，快来拼团吧</text>
+  <view class="avatar flex" style="{{ptDetailData.resobj.length + ptDetailData.count > 5 ? 'flex-wrap: wrap;width: 80%' : ''}}">
+    <!-- 头像遍历 -->
+    <block wx:for="{{ptDetailData.resobj}}">
+    <view style="position: relative;" wx:if="{{index==0}}">
+      <image src="{{item.userimg}}" binderror="popImgErr" data-index='{{index}}'></image>
+      <view  class="tuanzhang flex flex_align_center flex_pack_center" style="margin-bottom: 20rpx">团长</view>
+    </view>
+      <view class="" style="width: 110rpx;margin-left: 5rpx;margin-bottom: 20rpx" wx:else>
+        <image src="{{item.userimg}}" binderror="popImgErr" data-index='{{index}}'></image>
+      </view>
+    </block>
+    <block wx:for="{{ptDetailData.count}}">
+      <view style="width: 110rpx; height: 110rpx;margin-left: 5rpx;margin-bottom: 20rpx">
+        <image src="" style="background-color: #9B9B9B;border: 1rpx solid #d8d8d8;"></image>
+      </view>
+    </block>
+  </view>
+  <view class="btn flex flex_align_center flex_pack_center" 
+  data-orderid="{{ptDetailData.orderid}}" data-isingroup="{{ptData.isingroup}}" bindtap="goGroupDetail">
+    {{ptData.isingroup ? '已参团' : '与他拼团'}}
+  </view>
+</view>
+
+<!-- 商品详情 -->
+<view class="productMsg" style="{{isIphoneX ? 'padding-bottom: 144rpx;' : 'padding-bottom: 110rpx;'}}">
+  <view class="title" style="color:#666464;">商品详情</view>
+  <view class="content">
+    <block >
+       <template is="wxParse" data="{{wxParseData:productDetail.nodes}}" />
+    </block>
+    <!-- 没有商品详情内容 -->
+    <block wx:if="{{productDetail.nodes.length==0}}">
+      <view class="flex flex_v flex_align_center flex_pack_center" style="width: 100%;height: 300rpx;background-color: #f6f6fa">
+        <image wx:if="{{isduobao}}" style="width: 300rpx;height: 300rpx" src="../../image/nodata.png"></image>
+        <image wx:else src="../../image/naozhong.png" style="width: 320rpx;height: 320rpx;"></image>
+        <text class="color_999" style="font-size: 26rpx;">暂无商品介绍</text>
+      </view>
+    </block>
+  </view>
+  <!-- 资历认证 -->
+  <view class="gongshang" bindtap='gogongshang'>
+   <text>工商资质</text>
+   <image src="../../image/gongshang.png"></image>
+  </view>
+</view>
+<!-- 底部栏 -->
+<view class="footerBar flex" style="{{isIphoneX ? 'padding-bottom: 40rpx;' : ''}}">
+  <!-- 直接买 -->
+  <view class="buyNow flex flex_align_center flex_pack_center" bindtap='buyNow' wx:if="{{!isduobao}}">
+    <text>直接买 ￥{{filters.toFix(oldPrice,2)}}</text>
+  </view>
+  <!-- 拼团购 -->
+  <view class="ptBuy flex flex_align_center flex_pack_center" style="background:#F5AC9E;"  bindtap='groupbuy' wx:if="{{!isduobao}}">
+    <text>拼团购 ￥{{filters.toFix(price,2)}}</text>
+  </view>
+  <!-- 立即夺宝按钮 -->
+  <view style="background: #999;" class="dbBuy flex flex_align_center flex_pack_center"
+   wx:elif="{{(isduobao && (msg.state == 3 || msg.state == 4)) || hasJoin}}">
+    <text>{{hasJoin ? '已参与' : '已结束'}}</text>
+  </view>
+  <view class="dbBuy flex flex_align_center flex_pack_center" style="background:#F5AC9E;" bindtap='showlndiana'
+   wx:elif="{{isduobao && msg.state != 3}}">
+    <text>{{gopay ? '立即支付' : '立即抽奖'}} ￥{{filters.toFix(price,2)}}</text>
+  </view>
+</view>
+
+<!-- 弹窗遮罩 -->
+<view class="mark" hidden="{{markShow}}" bindtap="hideMark" catchtouchmove='true'></view>
+
+<!-- 保障弹窗 -->
+<view class="popup-content transition_ease_in_out" style="bottom: {{bindBottom? '0px':'-100%'}}">
+  <!-- <view class="popup-title text_center " style="color:#427161;">服务承诺</view> -->
+  <block wx:for="{{msg.commitmentlist}}">
+    <view class="popup-item">
+      <view class="flex flex_align_center">
+        <image src="{{item.logoimg}}"></image>
+        <text style="color:#427161;font-size:24rpx;">{{item.name}}</text>
+      </view>
+      <view class="popup-text" style="color:#9FA0A0;">{{item.content}}</view>
+    </view>
+  </block>
+</view>
+
+<!-- 分享弹窗 -->
+<!-- <template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" /> -->
+
+<!-- 数量弹窗 -->
+<view class="count flex flex_v flex_align_center flex_pack_justify_between transition_ease_in_out" 
+style="bottom: {{showNum ? '0px' : '-100%'}}">
+  <view class="numBox flex flex_align_center flex_pack_justify_between">
+    <view class="icon flex flex_align_center flex_pack_center iconfont icon-offline {{lndianaNum == 1 ? 'color_999' : ''}}" bindtap="lndianaCount"></view>
+    <text>{{lndianaNum}}</text>
+    <view class="icon flex flex_align_center flex_pack_center iconfont icon-addition"
+     style="{{lndianaNum == msg.remainingamout ? 'color: #999;' : lndianaNum == msg.max ? 'color: #999;' : '' }}" data-type="add" bindtap="lndianaCount"></view>
+  </view>
+  <view class="btn flex flex_align_center flex_pack_center" style="background:#F5AC9E;" bindtap="confirmLogin">确定数量</view>
+</view>
+
+
+<!-- 拼团规格弹窗 -->
+  <view class="sku_prompt_container" hidden="{{!skuBoxBottom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out" style="padding-bottom: {{isIphoneX? '48rpx;': '0;'}}bottom: {{skuBoxBottom ? '0' : '-100%'}}" data-id="box_container">
+    <view class="flex sku_prompt_top overflow_boxsizing">
+      <view class="box_proimg_container">
+        <image src="{{msg.pic?msg.pic:'/image/bkg_cover.jpg'}}"></image>
+      </view>
+      <view class="flex_1 flex flex_v flex_pack_justify_between sku_top_right">
+        <view class="color_333 font_14 line_over_2" style="line-height: 40rpx;">
+          <text style="color:#666464;">{{msg.name}}</text>
+        </view>
+        <view class="flex flex_align_center">
+          <view class="new_price_container">￥
+            <text class="new_price">{{filters.toFix(buyPrice*buyCounts,2)}}</text>
+          </view>
+          <view class="old_price">
+            <text class="font_14" style="color:#9b9b9b;">￥{{filters.toFix(ssprice*buyCounts,2)}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:for="{{spec}}">
+      <view class="product_imgs_title padding16 font_14">{{item.specname}}</view>
+      <view class="padding16">
+        <block wx:for="{{filters.toJson(item.spectext)}}" wx:for-index="idx" wx:for-item="texts" >
+          <text class="btn_sku {{filters.isHasMsg(specval, index, texts.valueid)?'actived_btn_sku': ''}}" data-valueid="{{texts.valueid}}" data-len="{{index}}" bindtap="changSku">{{texts.ctmtext}}</text>
+        </block>
+      </view>
+    </view>
+    <view class="flex flex_pack_center flex_align_center font_14 overflow_boxsizing" style="height: 110rpx; padding: 20rpx 32rpx;">
+      <view class="btn_addCart" bindtap='realBuy' hidden="{{buyGroup}}">
+        <text>直接买</text>
+      </view>
+      <view class="btn_buy" style="background:#F5AC9E;border:none;" bindtap="realgbuy" hidden="{{!buyGroup}}">
+        <text>拼团购</text>
+      </view>
+    </view>
+  </view>
+
+
+<coupon id="coupon" style="{{showCoupon ? 'display: block' : 'display: none'}}" companyid="{{msg.companyid}}" gbid="{{groupBuyList.gbid}}" bind:close="showcoupon" refresh="{{showCoupon}}"></coupon>

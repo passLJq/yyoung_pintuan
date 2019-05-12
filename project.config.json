@@ -1,0 +1,120 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wxe6bf55e98b556e41",
+	"projectname": "youyan_pingtuan",
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 5,
+			"list": [
+				{
+					"id": 0,
+					"name": "夺宝页",
+					"pathName": "pages/lndiana/lndiana",
+					"query": "cid=181017192214269118&buycount=2"
+				},
+				{
+					"id": 1,
+					"name": "分享海报",
+					"pathName": "pages/lndianaShare/lndianaShare",
+					"query": "buycount=1&cid=181017192214269118"
+				},
+				{
+					"id": -1,
+					"name": "我的夺宝",
+					"pathName": "pages/mylndiana/mylndiana",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "揭晓结果",
+					"pathName": "pages/lndiresult/lndiresult",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "夺宝支付",
+					"pathName": "pages/ordercomfirm/ordercomfirm",
+					"query": "cid=181012181802734026&buyCounts=2&way=lndiana"
+				},
+				{
+					"id": 5,
+					"name": "商品详情",
+					"pathName": "pages/groupbuy/groupbuy",
+					"query": "gbid=190424110710358222&pid=190110160509237845",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "抽奖详情",
+					"pathName": "pages/lndiresult/lndiresult",
+					"query": "byshare=1&cloudid=181017192214269118&ruid=180925113024606379"
+				},
+				{
+					"id": 7,
+					"name": "模拟扫二维码抽奖详情",
+					"pathName": "pages/lndiresult/lndiresult",
+					"query": "scene=1MoFPY,5s7v4lU:HWE**R"
+				},
+				{
+					"id": -1,
+					"name": "chuanye",
+					"pathName": "pages/lndiresult/lndiresult",
+					"query": "scene=1MoBXc.1Y!/7j;tc6,~qF",
+					"scene": "1034"
+				},
+				{
+					"id": -1,
+					"name": "chuanye",
+					"pathName": "pages/other/success_page/success_page",
+					"query": "way=groupbuynow&ogid=20181018180015965911",
+					"scene": "1034"
+				},
+				{
+					"id": 10,
+					"name": "我的",
+					"pathName": "pages/my_index/my_index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "登录页",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,117 @@
+/* pages/my_index/my_index.wxss */
+
+page {
+  background: #f5f5f5;
+}
+
+.my_tou {
+  height: 240rpx;
+  display: flex;
+  align-items: center;
+  padding: 38rpx 76rpx;
+  background: #427161;
+}
+
+.my_tou image {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  margin-right: 43rpx;
+}
+
+.my_tou text {
+  color: #fff;
+  font-size: 36rpx;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+}
+
+.my_ordertitle {
+  background-color: #fff;
+  justify-content: space-between;
+  padding: 24rpx 30rpx 24rpx 30rpx;
+}
+
+.my_ordertitle text {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.my_p1 {
+  font-size: 28rpx;
+  margin-right: 14rpx;
+  color: #676767;
+}
+
+.my_p1 i {
+  margin-top: 2rpx;
+}
+
+.jihuabox {
+  background: #fff;
+  padding: 30rpx 30rpx;
+}
+
+.jihuabox .my-item image {
+  width: 48rpx;
+  height: 48rpx;
+  margin: 0 auto;
+  margin-bottom: 8rpx;
+}
+
+.jihuabox .my-item {
+  width: 25%;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.order_box {
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  margin-top:48rpx;
+}
+.other_box,.act_oredr{
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  background: #fff;
+}
+.other_li{
+  padding: 24rpx 0 28rpx 0;
+  text-align: center;
+  width: 25%;
+}
+.other_li image{
+  width: 48rpx;
+  height: 48rpx;
+  margin: 0 auto;
+}
+.other_li text{
+  font-size: 24rpx;
+}
+.act_li{
+  width: 33.3%;
+  text-align: center;
+  padding: 40rpx 0;
+}
+.act_li image{
+  width:64rpx;
+  height: 64rpx;
+  margin: 0 auto;
+}
+.act_li text{
+font-size: 24rpx;
+}
+button::after{
+  border: none
+}
+.btnms{
+  background: #fff;
+  line-height: inherit;
+  border-radius: 0;
+  border:1px solid #fff;
+  color: #333
+}

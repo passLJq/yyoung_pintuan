@@ -1,0 +1,68 @@
+view, text {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.areaApp {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  transition: all .5s ease-in-out;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+	z-index: 999999;
+}
+.area {
+  width: 100%;
+}
+.area .tittle {
+  width: 100%;
+  font-size: 36rpx;
+  color: #2C5B33;
+  justify-content: space-between;
+  height: 45px;
+  border-bottom: 1px solid #f2f2f2;
+  position: relative;
+}
+.area .tittle > .backa {
+  font-size: 48rpx;
+  position: absolute;
+  left: 1.6%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.area .tittle > .backa > image {
+  width: 34rpx;
+  height: 34rpx;
+}
+.area .tittle > text {
+  font-size: 30rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.area > text {
+  font-size: 38rpx;
+}
+.area .areBox {
+  width: 100%;
+  padding: 0 30rpx;
+}
+.areBox > view {
+  width: 100%;
+  padding: 30rpx 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #DEDEE1;
+}
+.areBox > view > text {
+  font-size: 34rpx;
+  color: #9B9B9B;
+}
+.areBox > view > text:nth-child(2) {
+  color: #2C5B33
+}

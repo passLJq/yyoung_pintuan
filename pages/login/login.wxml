@@ -1,0 +1,17 @@
+<!--pages/login/login.wxml-->
+<view>
+<view class='title'><text>绑定手机号码</text></view>
+<view class="lo_item as">
+ <!-- <i class="iconfont icon-shouji"></i> -->
+ 	<view class="prefix" bindtap="showAreaBox">+{{areaCode}}<view class="sanDown"></view></view>
+  <input  bindinput="bind1" placeholder="手机号码" type='number' value='{{telphone}}' placeholder-style='font-size:24rpx' maxlength='{{maxlength}}'/>
+</view>
+<view class="lo_item code">
+  <input  bindinput="bind2" placeholder="验证码" type='number' value='{{smscode}}' placeholder-style='font-size:24rpx' maxlength='4'/>
+    <view bindtap='code' wx:if="{{clickon}}" class='codenum' style="background:rgba(245, 172, 158,.3);border-color:#F5AC9E;">获取验证码</view>
+    <view wx:else class='codenum timeout'>{{time}} S</view>
+</view>
+ <button class='ban wxbtn' open-type="getUserInfo"  bindgetuserinfo="bindgetuserinfo">确认绑定</button>
+ <!-- <view bindtap='que' class='ban wxbtn' wx:else>确认绑定</view> -->
+</view>
+<areaBox bind:bindArea="getArea" showBox="{{showArea}}"></areaBox>

@@ -1,0 +1,44 @@
+<!--pages/other/shopgroup/shopgroup.wxml-->
+<view class="box_container">
+  <image src="/image/shopgroup_bg.jpg" style="width:100vw; height: 100vh;"></image>
+  <view class="box_img_container flex flex_v flex_align_center color_333 padding16 overflow_boxsizing">
+    <view class="font_17" class="box_name">
+      <text>扫码添加入手客服</text>
+    </view>
+    <view class="erweima_container">
+      <image src="https://images.yyoungvip.com/WebApp/WebApps/Image/rushou.jpg" style="width: 242rpx; height: 242rpx;"></image>
+    </view>
+    <view class="footer_box flex flex_v flex_pack_justify_around">
+      <view class="font_16 font_weight color_333 footer_title translateXY">
+        <text>即可获得</text>
+      </view>
+      <view class="footer_list">
+        <view class="flex flex_align_center">
+          <text>获得每日精选推荐</text>
+        </view>
+        <view class="flex flex_align_center">
+          <text>店主实时经验交流</text>
+        </view>
+        <view class="flex flex_align_center">
+          <text>官方专业指导</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="box_content_container">
+    <view>
+      <text>客服微信</text>
+    </view>
+    <view>
+      <text class="iconfont icon-weixin" style="font-size: 38rpx;"></text>
+      <text class="font_17" style="display: inline-block;margin: 10rpx 0 18rpx 24rpx;">rushouyouxuan</text>
+    </view>
+    <view>
+      <text>客服热线</text>
+    </view>
+    <view>
+      <text class="iconfont icon-tel" style="font-size: 48rpx;"></text>
+      <text style="display: inline-block;margin-top: 10rpx;margin-left: 24rpx; font-size: 38rpx;">4006-906-206</text>
+    </view>
+  </view>
+</view>

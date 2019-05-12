@@ -1,0 +1,119 @@
+<!--pages/group_detail/group_detail.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml" />
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+
+<view class="g_box">
+  <view class="g_main">
+    <view class="g_xinqbox">
+      <view class="box_main items">
+        <image src="{{msgdata.proimage}}"></image>
+        <view class="pro_right">
+          <view class="pro_xian">
+            <view class="p1">
+              <text style="margin-right: 15rpx;{{msgdata.buyonegetone || msgdata.headfree ? '' : 'padding: 0'}}" class="allhave"><text style="{{msgdata.buyonegetone || msgdata.headfree ? 'margin-right: 10rpx;' : 'margin: 0;'}}" class="allhaveping">{{msgdata.gbnum}}人团</text>{{msgdata.headfree ? '团长免单 ' : ''}}{{msgdata.buyonegetone ? '拼一送一' : ''}}</text>{{msgdata.proname}}</view>
+          </view>
+          <view>
+            <view class="p3">
+              <text class="p4">¥</text>{{msgdata.gbprice}}
+              <text class="p5">原价{{msgdata.productprice}}</text>
+            </view>
+            <view class="pintishi">如未拼团成功，将全额返还原账户</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="gpbox">
+      <view class="gp1">{{commit}}</view>
+      <view class="gp2" wx:if="{{msgdata.gbstate==1&&!overtime}}">
+        <text>还差<text style="color:#FF5541">{{msgdata.num}}</text>人 距离结束</text>
+        <text style="color:#FF5541;margin-left:16rpx;">{{days<=0?'':day+'天'}}{{hours}}:{{minutes}}:{{seconds}}</text>
+      </view>
+       <view class="gp2" wx:if="{{msgdata.gbstate>=3&&!options.ruid}}">
+        <text>本次未成团，退款已原路退回</text>
+      </view>
+      <view class="items xiabox" style="{{allping.length>=5?'width:80%;flex-wrap:wrap':''}}">
+        <view class="canyu">
+          <image src='{{msgdata.imgphoto}}'></image>
+          <view class="or_name">{{msgdata.realname ? filters.hideName(msgdata.realname) : ' '}}</view>
+          <view class="tuanzhang">
+            <view>团长</view>
+          </view>
+        </view>
+        <view class="canyu" wx:for="{{allping}}">
+          <image src="{{msgdata.groupbuylist[index].head?msgdata.groupbuylist[index].head:(msgdata.groupbuylist[index].head==''?'../../image/man.jpg':'../../image/hui.png')}}"></image>
+          <view class="or_name">{{msgdata.groupbuylist[index].name?filters.hideName(msgdata.groupbuylist[index].name):(msgdata.gbstate>=3?'':'待邀请')}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='rule'>
+  <view class="rule1">玩法说明</view>
+  <view style="position:relative">
+    <view class="rule2">
+      <image src="../../image/wanfashuoming@3x.png" mode="widthFix"></image>
+    </view>
+    <view class="rule3 rule4">
+      <view>选择商品</view>
+      <view>参加活动</view>
+    </view>
+    <view class="rule3 rule5">
+      <view>支付开团</view>
+      <view>或拼团</view>
+    </view>
+    <view class="rule3 rule6">
+      <view>邀请好友</view>
+      <view>参团支付</view>
+    </view>
+    <view class="rule3 rule7">
+      <view>人满成功</view>
+      <view>失败退款</view>
+    </view>
+  </view>
+</view>
+
+<view class="btnzu">
+  <view class="othbtn" bindtap='goindex'>其他拼团</view>
+  <navigator class='btnorder' hover-class="none" open-type="navigate" url="/pages/orderdetail/orderdetail?orderid={{options.orderid}}" wx:if="{{msgdata.gbstate==2&&!options.ruid}}">{{btnmessg}}</navigator>
+  <view class='wxbtn' bindtap='gobuy' wx:else>{{btnmessg}}</view>
+</view>
+<!-- 分享弹窗 -->
+<template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" />
+
+
+<!-- 拼团规格弹窗 -->
+  <view class="sku_prompt_container" hidden="{{!skuBoxBottom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out" style="padding-bottom: {{isIphoneX? '48rpx;': '0;'}}bottom: {{skuBoxBottom ? '0' : '-100%'}}" data-id="box_container">
+    <view class="flex sku_prompt_top overflow_boxsizing">
+      <view class="box_proimg_container">
+        <image src="{{msgdata.proimage?msgdata.proimage:'/image/bkg_cover.jpg'}}"></image>
+      </view>
+      <view class="flex_1 flex flex_v flex_pack_justify_between sku_top_right">
+        <view class="color_333 font_14 line_over_2" style="line-height: 40rpx;">
+          <text style="color:#666464;">{{msgdata.proname}}</text>
+        </view>
+        <view class="flex flex_align_center">
+          <view class="new_price_container">￥
+            <text class="new_price">{{filters.toFix(buyPrice,2)}}</text>
+          </view>
+          <view class="old_price">
+            <text class="font_14" style="color:#9b9b9b;">￥{{filters.toFix(msgdata.productprice,2)}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:for="{{spec}}">
+      <view class="product_imgs_title padding16 font_14">{{item.specname}}</view>
+      <view class="padding16">
+        <block wx:for="{{filters.toJson(item.spectext)}}" wx:for-index="idx" wx:for-item="texts" >
+          <text class="btn_sku {{filters.isHasMsg(specval, index, texts.valueid)?'actived_btn_sku': ''}}" data-valueid="{{texts.valueid}}" data-len="{{index}}" bindtap="changSku">{{texts.ctmtext}}</text>
+        </block>
+      </view>
+    </view>
+    <view class="flex flex_pack_center flex_align_center font_14 overflow_boxsizing" style="height: 110rpx; padding: 20rpx 32rpx;">
+      <view class="btn_buy" style="background:#F5AC9E;border:none;" bindtap="realgbuy">
+        <text>拼团购</text>
+      </view>
+    </view>
+  </view>

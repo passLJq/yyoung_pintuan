@@ -1,0 +1,7 @@
+<!--pages/other/gongshang/gongshang.wxml-->
+<image src='{{img}}' style='width:100%' mode="widthFix" wx:if="{{img!='null'}}"></image>
+<view class="apps" wx:else>
+<image src="https://images.yyoungvip.com/WebApp/WebApps/Image/noname.png" mode="widthFix"></image>
+<view>很抱歉</view>
+<view>商家暂未上传工商资质</view>
+</view>

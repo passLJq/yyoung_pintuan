@@ -1,0 +1,116 @@
+/* pages/other/success_page/success_page.wxss */
+@import "/common/font-awesome.wxss";
+@import "../../../Component/sharebox/sharebox.wxss";
+page{overflow: hidden;background: #fff}
+.top_container{width: 100%; height: 200rpx; background:rgba(205,168,110,0.2);padding: 32rpx;}
+.bottom_container{position: absolute; top: 180rpx; width: 100%; height: 100%; background-color: #fff; border-radius: 32rpx;}
+.list_container{width: 100%; height: 88rpx; padding: 0 32rpx; line-height: 88rpx; color: #333; font-size: 28rpx;}
+.list_container>view{border-bottom: 2rpx solid #F6F6FA; height: 100%; box-sizing: border-box;}
+.items{
+  display: flex;
+  align-items: center;
+}
+.canyu{
+  font-size: 24rpx;
+  text-align: center;
+  color: #999;
+  position: relative;
+}
+.or_name{
+  overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;
+  width: 96rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+}
+.tuanzhang{
+  position: absolute;
+  bottom:44rpx;
+  left: 0;
+  right: 0;
+}
+.tuanzhang view{
+   color: #fff;
+  background:linear-gradient(270deg,rgba(232,55,74,1) 0%,rgba(253,94,67,1) 100%);
+  font-size: 20rpx;
+  border-radius: 30px;
+  width: 75%;
+  margin: 0 auto;
+}
+.xiabox{
+  justify-content: space-around;
+  width: 50%;
+  margin: 100rpx auto;
+}
+.canyu image{
+  width: 96rpx;
+  height: 96rpx;  
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.gp1{
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333;
+  padding: 0 0 20rpx 0;
+  text-align: center;
+  margin-top: 104rpx;
+}
+.gp2{
+   font-weight: 700;
+  color: #333;
+  font-size: 36rpx;
+  text-align: center;
+  margin-bottom: 44rpx;
+  margin-top: 36rpx;
+}
+.gpbox{
+  padding: 60rpx 0;
+}
+.numone{
+  color: #FF5541;
+  font-weight:600;
+  padding: 0 10rpx;
+  font-size: 48rpx
+}
+.wxbtn{
+  width: 90%;
+}
+.xiatext{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.sharpmore{
+  position: fixed;
+  top:30%;
+  width: 80%;
+  border-radius: 16px;
+  left: 10%;
+  z-index: 999999;
+  background: #fff;
+text-align: center;
+font-size: 36rpx;
+font-weight: 700;
+}
+.sharpbtn{
+  background:linear-gradient(270deg,rgba(232,55,74,1) 0%,rgba(253,94,67,1) 100%);
+  color:#fff;
+  width: 80%;
+  border-radius: 38px;
+  margin: 0 auto;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  margin-bottom: 40rpx
+}
+.sharptext{
+  margin: 118rpx 0 100rpx 0;
+}
+.apings{
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-top: 200rpx;
+}

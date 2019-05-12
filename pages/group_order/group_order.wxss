@@ -1,0 +1,134 @@
+/* pages/group_order/group_order.wxss */
+.box{
+  background-color: #fff;
+  padding: 0 30rpx;
+  margin-bottom: 20rpx;
+}
+.nodata,.bigbox{
+    margin-top: 72rpx;
+}
+.items{display: flex;align-items: center;}
+.oreder_tou{
+  justify-content: space-between;
+
+}
+.o_tou_left{
+  font-size: 28rpx;
+  color: #333;
+}
+.o_tou_left text{
+  font-size: 20rpx;
+  color: #fff;
+  padding: 4rpx 22rpx;
+  background-color: #EB6100;
+  margin-left: 20rpx;
+  border-radius: 30px;
+}
+.oreder_tishi{
+  font-size: 28rpx;
+  color: #EB6100;
+  font-weight: 700;
+}
+.order_time{
+  font-size: 24rpx;
+  color: #999
+}
+.box_tou{
+  padding: 26rpx 0;
+  border-bottom: 1px solid #F6F6FA;
+}
+.box_main{
+  padding: 24rpx 0;
+   border-bottom: 1px solid #F6F6FA;
+}
+.box_main image{
+  width: 192rpx;
+  height: 192rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+.p1{
+  font-size: 24rpx;
+  overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+  margin-bottom: 44rpx;
+  line-height: 2;
+}
+.p3{
+  font-size: 36rpx;
+  color: #FF5541;
+}
+.p4{
+  color: #FF5541;
+  font-size: 24rpx;
+}
+.p5{
+  color: #999;
+  font-size: 20rpx;
+  text-decoration: line-through;
+}
+.box_foot{
+  justify-content: space-between;
+  padding: 16rpx 0
+}
+.oreder_imge image{
+width:64rpx;
+height: 64rpx;
+margin-right: 10rpx;
+border-radius: 50%;
+}
+.order_btn{
+  display: flex;
+  align-items: center;
+}
+.order_btn text:nth-child(1){
+  color: #9B9B9B;
+  border: 1px solid #9B9B9B;
+  padding: 12rpx 30rpx;
+  font-size: 24rpx;
+  border-radius: 30px;
+}
+.abse{
+  color: #F5AC9E;
+  border: 1px solid #F5AC9E;
+  padding: 12rpx 30rpx;
+  font-size: 24rpx;
+  border-radius: 30px;
+  margin-left: 20rpx;
+}
+.tablie{
+  font-size: 28rpx;
+  color: 28rpx;
+  padding: 16rpx 0;
+  width: 25%;
+  background: #fff;
+  text-align: center;
+  position: relative;
+}
+.renlie{
+  position: absolute;
+  bottom:0;
+  width: 100%;
+}
+.redline{
+  width: 55%;
+  background-color: rgb(255,85,65);
+  height: 6rpx;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+.bordes{
+  color: #fff;
+  border-radius: 30px;
+  padding: 16rpx 40rpx;
+  margin: 60rpx auto;
+  text-align: center;
+  width: 30%;
+  font-weight: 700;
+  font-size: 28rpx;
+  background:rgba(235,97,0,1);
+}
+.ordetou{
+  position: fixed;
+  top:0;
+  width: 100%;
+}

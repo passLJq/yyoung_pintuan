@@ -1,0 +1,58 @@
+
+<view class="mark" bindtap="close" bindtouchmove='false'></view>
+<view class="mainn">
+        <view class="tit">申请发票</view>
+        <view class="type">
+          <view class="title">发票类型</view>
+          <view class="conton">
+            <view class="conitem {{invType==0?'active':''}}" data-index="0" bindtap="selectType">不开票</view>
+            <view class="conitem {{invType==1?'active':''}}" data-index="1" bindtap="selectType">普通发票</view>
+            <view class="conitem {{invType==2?'active':''}}" data-index="2" bindtap="selectType">增值税专用发票</view>
+          </view>
+        </view>
+
+        <view class="type {{invType==0?'closeAll':''}}" >
+          <view class="title">发票抬头</view>
+          <view class="conton">
+            <view class="conitem  {{invWho==1?'active':''}}" bindtap="selectWho" data-index="1">个人</view>
+            <view class="conitem  {{invWho==2?'active':''}}" bindtap="selectWho" data-index="2">公司</view>
+          </view>
+          <view class="inpt">
+            <input hidden="{{invType==0?true:invWho==2?false:true}}" bindinput="getbus" type="text" class="inp1" placeholder="这里填写公司名称"></input>
+          </view>
+          <view class="inpt">
+             <input hidden="{{invType==0?true:invWho==2?false:true}}" bindinput="getnum" maxlength="20" type="number" class="inp2" placeholder="请在此填写纳税人识别号" placeholder-class="inp2holder"></input>
+          </view>
+         
+        </view>
+        <view class="type">
+          <view class="title">收票人信息</view>
+          <view class="conton flexx">
+            <view class="ema">*收票人邮箱</view>
+            <input class="emainput" type="text" bindinput="getema" placeholder="用来接收发票邮件" placeholder-class="emaholder"></input>
+          </view>
+        </view>
+
+        <view class="type {{invType==0?'closeAll':''}}" >
+          <view class="title">发票内容</view>
+          <view class="conton">
+            <view class="conitem {{invCon==1?'active':''}}" bindtap="selectCon" data-index="1">商品明细</view>
+            <view class="conitem {{invCon==2?'active':''}}" bindtap="selectCon" data-index="2">商品类别</view>
+          </view>
+          <span class="tip">发票内容将详细商品名称与价格信息</span>
+        </view>
+
+        <view class="confirm" bindtap="confirmInv">确认</view>
+
+</view>
+<!-- <view hidden="!showPop" class="commark" id="commark" bindtap="closecom"> -->
+<view style="{{!showPop ? 'display:none':''}}" class="commark" id="commark" bindtap="closecom">
+        <view class="com">
+          <view class="titt">请确认纳税人识别号是否正确?</view>
+          <view class="numm" id="nssbh">{{invoiceNumber}}</view>
+          <view class="btnbox">
+            <view class="cof" bindtap="queren">正确</view>
+            <view class="qx" bindtap="closecom">取消</view>
+          </view>
+        </view>
+</view>

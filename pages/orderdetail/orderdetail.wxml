@@ -1,0 +1,175 @@
+<!--pages/orderdetail/orderdetail.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view>
+  <!--订单状态  -->
+  <view class="headdd">
+    <text>{{list.orderstate == 10? '待付款':list.orderstate == 11? '待处理': list.orderstate == 20? '待发货': list.orderstate == 30? '已发货': list.orderstate == 40? '交易完成': list.orderstate == 50? '已退货': list.orderstate == 60? '已退款': list.orderstate == 62? '申请换货': list.orderstate == 70? '交易关闭': '--'}}</text>
+    <view>
+      <image mode="widthFix" src="../../image/all.png"></image>
+    </view>
+  </view>
+  <!--订单信息  -->
+  <view class="messg">
+  <view class="messitm" bindtap='toExpressDetail' wx:if="{{list.deliverydata && list.deliverydata.expressjson}}" data-orid="{{list.orderid}}">
+      <image style="margin-left:7rpx;" mode="widthFix" src="../../image/car.png"></image>
+      <view class="vieew">
+        <text style="color:#215645;" class="line_over_2">{{expressjson.result.list[0].status}}</text>
+        <text>{{expressjson.result.list[0].time}}</text>
+      </view>
+      <view style="width: 88rpx; text-align: right;">
+        <text class="more_icon"></text>
+      </view>
+    </view>
+    <view class="messitm">
+      <image mode="widthFix" src="../../image/wuliu_icon@3x.png"></image>
+      <view class="vieew">
+        <text>{{list.linkman}}   {{list.phone && list.phone}}</text>
+        <text>{{list.fullarea}}{{list.address}}</text>
+      </view>
+    </view>
+  </view>
+  <!--商品信息  -->
+  <view class="marginBt10 padding16">
+    <view class="list_center_container bottom_border font_14 color_333" wx:for="{{list.orderitems}}" bindtap="toOrderDetail" data-orderid="{{list.orderid}}" wx: wx:key="length" wx:for-item="items" wx:for-index="items_idx">
+      <view class="flex product_list overflow_sizing" style="border-bottom: 2rpx solid #DEDEE1;">
+        <view class="product_img_container">
+          <image src="{{items.pic || '/image/bkg_cover.jpg'}}"></image>
+        </view>
+        <view class="flex_1 flex flex_v flex_pack_justify_between">
+          <view class="flex flex_pack_justify_between">
+            <view class="line_over_2">
+              <text style="color:#666464;"><text class="quanqiu" wx:if="{{items.iscrossorder}}"><text>全球购</text>包邮包税</text>{{items.proname}}</text>
+            </view>
+          </view>
+          <view wx:if="{{items.price}}" style="margin: 20rpx 0;">
+              <text style="color:#E69888;">￥{{items.price}}</text>
+            </view>
+          <view class="flex flex_pack_justify_between font_12 color_999">
+            <view>
+              <text>{{items.skutext || ""}}</text>
+            </view>
+            <view>
+              <text>X{{items.buycount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      
+      <!-- 退款按钮 -->
+      <block wx:if="{{(list.orderstate == 20 || (list.orderstate == 40 && !list.isoversevenday)) && !items.isrefundorder && list.ordetype != 4 && list.ordetype != 12 && items.ordertype != 110}}">
+        <view class="container_other" style='border-bottom:0rpx solid #F6F6FA' wx:if="{{!list.gbdata||(list.gbstate == 2&&!list.gbdata.headfree)}}">
+          <view class="cancle" hover-class='hover_btn' bindtap="toRefund" data-orderid="{{list.orderid}}" data-itemid="{{items.itemid}}" data-proid="{{items.proid}}" data-buycount="{{items.buycount}}" data-refundprice="{{items.refundprice}}" data-proname="{{items.proname}}"
+            data-pic="{{items.pic}}" data-skutext="{{items.skutext}}">
+            <text>申请退款</text>
+          </view>
+        </view>
+      </block>
+      <!-- 换货按钮 -->
+      <view class="container_other" wx:if="{{(list.orderstate == 62 || list.orderstate == 40) && (list.ordetype == 4 || list.ordetype == 12) && !items.isexchangeorder}}" style='border-bottom:0rpx solid #F6F6FA'>
+        <view class="cancle" hover-class='hover_btn' bindtap="tohuanpro" data-orderid="{{list.orderid}}" data-itemid="{{items.itemid}}" data-proid="{{items.proid}}" data-packageid="{{items.packageid}}" data-buycount="{{items.buycount}}" data-proname="{{items.proname}}">
+          <text>申请换货</text>
+        </view>
+      </view>
+      <!-- 换货提醒 -->
+      <view wx:if="items.isexchangeorder" style="padding: 10rpx 0;text-align: right">
+        <text wx:if="{{items.exchangestatus==1}}">商品换货申请待处理...</text>
+        <text wx:if="{{items.exchangestatus==2}}">商品换货申请被拒绝...</text>
+        <text wx:if="{{items.exchangestatus==3}}">商品换货申请已通过...</text>
+      </view>
+    </view>
+		<view class="container_other flex flex_pack_justify_between font_12 color_666" style="border:none;">
+        <text>运费：</text>
+        <text>{{list.ordersFreight != 0 ? '￥'+filters.toFix(list.ordersFreight, 2) : '卖家包邮'}}</text>
+      </view>
+		<view class="container_other flex flex_pack_justify_between font_12 color_666">
+        <text>优惠：</text>
+        <text>￥<text class="font_12">{{filters.toFix(list.couponoffset, 2)}}</text></text>
+      </view>
+			<view class="container_other flex flex_pack_justify_between font_12 color_666">
+        <text>共{{list.totalbuycount}}件商品 实付：</text>
+        <text wx:if="{{list.total}}">￥<text class="font_12" wx:if="{{list.total}}">{{filters.toFix(list.total, 2)}}</text></text>
+      </view>
+    <view class="btnbox">
+			<button  open-type='contact' style="width: 170rpx;border-color:#666464;color:#666464;background:#fff;transform:translateY(20rpx);" wx:if="{{list.orderstate != 10}}" class="cancle" >
+        <text>联系开票</text>
+      </button>
+      <view style="border-color:#E69888;color:#E69888;"  wx:if="{{list.orderstate == 30}}" class="cancle" hover-class='hover_btn' bindtap="toReceipt" data-orderid="{{list.orderid}}">
+        <text>确认收货</text>
+      </view>
+    </view>
+
+    
+    <!-- 拼团提示语 -->
+    <view class="container_other font_14 color_333 marginBt10" wx:if="{{(list.orderstate == 20 || list.orderstate == 30)&&list.gbid&&!list.orderitems[0].isrefundorder}}" style="color: #4C6195;">
+                 <text>{{list.gbstate==1?'等待成团，快去邀请小伙伴参与吧..':list.gbstate==2?(list.orderstate==30?'拼团成功，商品已经在路上，请耐心等待...':'拼团成功，商品正在打包中，请耐心等待...'):'拼购失败,已全额退款'}}</text>
+    </view>
+    <!-- //普通商品提示语 -->
+    <view class="container_other font_14 color_333 marginBt10" style="text-align: right;color: #4C6195;" wx:if="{{orderindexs < 1 && (((list.orderstate == 20 || list.orderstate == 30) && list.gbid === null) || orderitems.isrefundorder)}}" wx:for="{{list.orderitems}}"
+      wx:for-item="orderitems" wx:key="{{orderitems.orderid}}" wx:for-index="orderindexs">
+      <text>{{orderitems.isrefundorder ? (orderitems.refundstatus === 1 ? '商品退款审核中，请您耐心等待....' : orderitems.refundstatus === 2 ? '商品退款申请被拒绝...' : orderitems.refundstatus === 3 ? (list.gbdata.headfree&&list.gbstate<3?'恭喜您，获得团长免单机会，已全额退款':'商品退款成功') : orderitems.refundstatus === 4 ? '商品退款申请已失效...' : '商品退款申请处理中...') : (list.orderstate === 20 ? '商品正在打包中，请耐心等待...' : list.orderstate === 30 ? '商品已经在路上，请耐心等待...' : '')}}</text>
+    </view>
+  </view>
+  <!--订单信息  -->
+  <view class="padding16 footer_container flex flex_v flex_pack_justify_around overflow_boxsizing" style="margin-bottom:0;">
+    <view class="flex flex_pack_justify_between">
+      <view>
+        <text>订单编号：</text>
+        <text>{{list.orderid}}</text>
+      </view>
+      <view class="font_11 copy_btn" hover-class='hover_btn' bindtap='toCopy'>
+        <text>复制</text>
+      </view>
+    </view>
+    <view>
+      <text>支付方式：</text>
+      <text>{{list.orderstate == 10 ? "未支付" : list.paymenttype}}</text>
+    </view>
+    <view>
+      <text>下单时间：</text>
+      <text>{{list.createtime}}</text>
+    </view>
+    <view wx:if="{{list.deliverydata}}">
+      <text>发货时间：</text>
+      <text>{{list.deliverydata.time}}</text>
+    </view>
+    <view wx:if="{{list.deliverydata && list.deliverydata.apicodes.ac}}">
+      <text>快递方式：</text>
+      <text>{{list.deliverydata.companyname}}</text>
+    </view>
+    <view wx:if="{{list.deliverydata && list.deliverydata.trackno}}">
+      <text>快递单号：</text>
+      <text>{{list.deliverydata.trackno}}</text>
+    </view>
+  </view>
+
+  <!-- <view class="padding16 footer_container flex flex_v flex_pack_justify_around overflow_boxsizing" style="margin-top:20rpx;">
+    <view>
+      <text>发票信息</text>
+    </view>
+    <view>
+      <text>发票状态：</text>
+      <text>{{list.isInvoice ? '已开票' : '不开发票'}}</text>
+    </view>
+    <brock wx:if="{{list.isInvoice}}">
+      <view>
+        <text>发票类型：</text>
+        <text>{{list.invoiceType == 1 ? '电子普通发票' : '电子增值税发票'}}</text>
+      </view>
+      <view>
+        <text>发票抬头：</text>
+        <text>{{list.invoiceTitle == 2 ? list.invoiceCompanyName : '个人'}}</text>
+      </view>
+      <view wx:if="{{list.invoiceTitle == 2}}">
+        <text>公司税号：</text>
+        <text>{{list.invoiceNumber}}</text>
+      </view>
+      <view>
+        <text>发票内容：</text>
+        <text>{{list.invoiceData == 1 ? '商品明细' : '商品类别'}}</text>
+      </view>
+    </brock>
+  </view> -->
+
+
+</view>

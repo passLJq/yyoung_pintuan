@@ -1,0 +1,10 @@
+/* pages/other/gongshang/gongshang.wxss */
+.apps{
+  text-align: center;
+  margin: 0 auto
+}
+.apps image{
+  margin: 40rpx auto;
+  background: #fff;
+  width: 60%
+}

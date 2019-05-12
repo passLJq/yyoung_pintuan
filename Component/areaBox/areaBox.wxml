@@ -1,0 +1,33 @@
+<view class="areaApp" style="{{showArea ? 'top: 0' : ''}}">
+  <view class="area">
+    <view class="tittle">
+      <view class="backa" bindtap="close">
+        <image mode="widthFix" src="../../image/icon-back.png" alt=""></image>
+      </view>
+      <text>选择地区</text>
+      <view style="width:10px;height:10px;"></view>
+    </view>
+    <view class="areBox">
+      <view wx:for="{{areaArr}}" bindtap="ontouchs" data-areacode="{{item.areaCode}}">
+        <text>{{item.area}}</text>
+        <text>+ {{item.areaCode}}</text>
+      </view>
+      <!-- <view bindtap="ontouchs" data-code="48">
+        <text>香港</text>
+        <text>+ 48</text>
+      </view>
+      <view bindtap="ontouchs" data-code="853">
+        <text>澳门</text>
+        <text>+ 853</text>
+      </view>
+      <view bindtap="ontouchs" data-code="886">
+        <text>台湾</text>
+        <text>+ 886</text>
+      </view>
+			<view bindtap="ontouchs" data-code="91">
+        <text>印度（测试专用）</text>
+        <text>+ 91</text>
+      </view> -->
+    </view>
+  </view>
+</view>

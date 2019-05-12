@@ -1,0 +1,39 @@
+/* pages/login/login.wxss */
+@import "../../common/iconfont.wxss";
+page{background-color: #fff;}
+.title{color: #333;font-size: 48rpx;margin: 0 auto;margin-top: 18%;text-align: center}
+.lo_item{display: flex;align-items: center;width: 90%;border-bottom: 1px solid #F6F6FA;margin: 0 auto;padding: 20rpx 0}
+.lo_item i{font-size: 50rpx;margin: 0 20rpx;color: #999999}
+.lo_item input{color: #000;font-size: 34rpx}
+.code{justify-content: space-between;margin-top: 40rpx}
+.codenum{font-size: 24rpx;color: #CDA86E;border: 1px solid #CDA86E;
+background-color: rgba(205,168,110,0.2);padding: 10rpx 20rpx;border-radius: 30px;width: 200rpx;text-align: center
+}
+.code input{margin-left: 34rpx}
+.ban{width: 90%;position: fixed;bottom:120rpx;left: 5%;line-height: 1.5}
+.as{margin-top: 20%}
+.timeout{background: #fff;border:1px solid #CDA86E;color: #CDA86E}
+
+/* 号码前缀 */
+.prefix {
+  color: #2c5b33;
+  background-color: #d8d8d8;
+  font-size: 28rpx;
+  /* height: 50rpx; */
+  display: flex;
+  align-items: center;
+  padding: 6rpx 12rpx;
+  margin-right: 16rpx;
+  margin-left: 34rpx;
+  border-radius: 4rpx
+}
+.sanDown {
+  width:0;
+  height:0;
+  border-width: 20rpx 16rpx 0;
+  border-style:solid;
+  border-color:#2c5b33 transparent transparent;/*灰 透明 透明 */
+  margin-top: 4rpx;
+  position:relative;
+  box-sizing: content-box;
+}
