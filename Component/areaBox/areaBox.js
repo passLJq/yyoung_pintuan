@@ -1,5 +1,6 @@
 const app = getApp()
 const util = require("../../utils/util.js")
+const areaData = require('../../utils/area.js')
 Component({
   /**
    * 组件的属性列表
@@ -15,7 +16,8 @@ Component({
 						bool = true
 					}
 					this.setData({
-						showArea: bool
+						showArea: bool,
+						showPx: bool
 					})
 				}
       }
@@ -27,15 +29,18 @@ Component({
    */
   data: {
 		showArea: false,
-		areaArr: [
-			{"area": "中国", "areaCode": "86" },
-			{ "area": "香港", "areaCode": "852" },
-			{"area": "澳门", "areaCode": "853" },
-			{"area": "台湾", "areaCode": "886" },
-			// {"area": "印度(测试)", "areaCode": "91"},
-		]
+		height: 0,
+		areaArr: areaData,
+		nav: '',
+		showPx: false
   },
-
+	ready() {
+		var h = wx.getSystemInfoSync().windowHeight - 45
+		this.setData({
+			height: h
+		})
+		
+	},
 
   /**
    * 组件的方法列表
@@ -49,6 +54,13 @@ Component({
 			console.log(code)
 			if (!code) return
 			this.triggerEvent('bindArea', {'areaCode': code })
+		},
+		goGroup(e) {
+			var val = e.currentTarget.dataset.key
+			this.setData({
+				nav: val
+			})
+			app.promsg(e.currentTarget.dataset.key == 'O' ? '#' : e.currentTarget.dataset.key)
 		}
 	}
 })

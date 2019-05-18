@@ -1,33 +1,27 @@
+<!-- 因为小程序不能用数字做id开头，包括#，所以用O代替# -->
+
 <view class="areaApp" style="{{showArea ? 'top: 0' : ''}}">
-  <view class="area">
+  <view class="area" style="height: 100%;">
     <view class="tittle">
       <view class="backa" bindtap="close">
-        <image mode="widthFix" src="../../image/icon-back.png" alt=""></image>
+        <image src="../../image/icon-back.png" alt=""></image>
       </view>
       <text>选择地区</text>
       <view style="width:10px;height:10px;"></view>
     </view>
-    <view class="areBox">
-      <view wx:for="{{areaArr}}" bindtap="ontouchs" data-areacode="{{item.areaCode}}">
-        <text>{{item.area}}</text>
-        <text>+ {{item.areaCode}}</text>
+    <scroll-view scroll-y style="height:{{height}}px;" scroll-into-view="{{nav}}" class="areBox">
+      <view class="group scroll-view-item" wx:for="{{areaArr}}" id="{{areaItem.Key}}" wx:for-item="areaItem" wx:for-index="idx">
+        <view class="ttit">{{areaItem.Key == 'O' ? '#' : areaItem.Key}}</view>
+        <view class="itemm" wx:for="{{areaItem.Data}}" bindtap="ontouchs" data-areacode="{{item.Areacode}}">
+          <text>{{item.Name}}</text>
+          <text>{{item.Areacode}}</text>
+        </view>
       </view>
-      <!-- <view bindtap="ontouchs" data-code="48">
-        <text>香港</text>
-        <text>+ 48</text>
-      </view>
-      <view bindtap="ontouchs" data-code="853">
-        <text>澳门</text>
-        <text>+ 853</text>
-      </view>
-      <view bindtap="ontouchs" data-code="886">
-        <text>台湾</text>
-        <text>+ 886</text>
-      </view>
-			<view bindtap="ontouchs" data-code="91">
-        <text>印度（测试专用）</text>
-        <text>+ 91</text>
-      </view> -->
+    </scroll-view>
+  </view>
+  <view class="px" hidden="{{!showPx}}">
+    <view>
+      <view class="li" wx:for="{{areaArr}}" data-key="{{item.Key}}" bindtap="goGroup">{{item.Key == 'O' ? '#' : item.Key}}</view>
     </view>
   </view>
 </view>

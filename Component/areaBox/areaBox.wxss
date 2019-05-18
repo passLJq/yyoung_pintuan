@@ -1,31 +1,34 @@
 view, text {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .areaApp {
   position: fixed;
   top: 100%;
   left: 0;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
   background-color: #fff;
-	z-index: 999999;
+  z-index: 999999;
 }
+
 .area {
   width: 100%;
 }
+
 .area .tittle {
   width: 100%;
-  font-size: 36rpx;
-  color: #2C5B33;
+  font-size: 29rpx;
+  color: #2c5b33;
   justify-content: space-between;
   height: 45px;
   border-bottom: 1px solid #f2f2f2;
   position: relative;
 }
+
 .area .tittle > .backa {
   font-size: 48rpx;
   position: absolute;
@@ -33,10 +36,12 @@ view, text {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .area .tittle > .backa > image {
   width: 34rpx;
   height: 34rpx;
 }
+
 .area .tittle > text {
   font-size: 30rpx;
   position: absolute;
@@ -44,25 +49,65 @@ view, text {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 .area > text {
   font-size: 38rpx;
 }
+
 .area .areBox {
   width: 100%;
-  padding: 0 30rpx;
+  /* padding: 0 30rpx; */
 }
-.areBox > view {
+
+.areBox .group {
   width: 100%;
-  padding: 30rpx 40rpx;
+}
+
+.areBox .group > .ttit {
+  font-size: 36rpx;
+  padding: 20rpx 30rpx;
+  background-color: #f6f6fa;
+}
+
+.areBox .itemm {
+  width: 90%;
+  padding: 30rpx 70rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #DEDEE1;
+  border-bottom: 1px solid #dedee1;
 }
-.areBox > view > text {
+
+.areBox .itemm > text {
   font-size: 34rpx;
-  color: #9B9B9B;
+  color: #9b9b9b;
 }
-.areBox > view > text:nth-child(2) {
-  color: #2C5B33
+
+.areBox .itemm > text:nth-child(2) {
+  color: #2c5b33;
+}
+
+.px {
+  width: 50rpx;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.px > view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.px > view > .li {
+  font-size: 24rpx;
+  padding: 6rpx 0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.li + .li {
+  border-top: 1px solid #f6f6fa;
 }

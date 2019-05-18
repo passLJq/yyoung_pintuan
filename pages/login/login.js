@@ -1,7 +1,7 @@
 // pages/login/login.js
 var app=getApp()
 const util = require('../../utils/util.js')
-var tiomeout
+var timeout = null
 Page({
 
   /**
@@ -34,6 +34,9 @@ Page({
 		} else if (areaCode == 886) {
 			length = 10
 		}
+		// if (timeout != '' && timeout != null) {
+		// 	clearInterval(timeout)
+		// }
 		clearInterval(timeout)
 		this.setData({
 			showArea: 0,
@@ -180,14 +183,14 @@ Page({
           time: a
         })
       } else {
-        clearInterval(tiomeout);
+        clearInterval(timeout);
         that.setData({
           clickon: true,
           time: 60
         })
       }
     }
-    tiomeout = setInterval(times, 1000)
+    timeout = setInterval(times, 1000)
     wx.request({
       url: app.globalData.siteUrl + '/main/Login/SendSMSCode',
       data: {

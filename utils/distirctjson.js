@@ -1255,14 +1255,6 @@ var DistirctJson = {
               "ftitle": "新市区"
             },
             {
-              "fid": "130603",
-              "ftitle": "北市区"
-            },
-            {
-              "fid": "130604",
-              "ftitle": "南市区"
-            },
-            {
               "fid": "130621",
               "ftitle": "满城县"
             },
@@ -1349,7 +1341,11 @@ var DistirctJson = {
             {
               "fid": "130684",
               "ftitle": "高碑店市"
-            }
+						},
+						{
+							"fid": "130685",
+							"ftitle": "莲池区"
+						}
           ]
         },
         {
